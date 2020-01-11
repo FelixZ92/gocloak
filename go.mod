@@ -1,4 +1,4 @@
-module github.com/Nerzal/gocloak/v4
+module github.com/felixz92/gocloak/v4
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
