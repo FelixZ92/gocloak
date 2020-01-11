@@ -65,6 +65,7 @@ func (apiError APIError) Error() string {
 	return apiError.Message
 }
 
+// +k8s:deepcopy-gen=true
 // CertResponseKey is returned by the certs endpoint
 type CertResponseKey struct {
 	Kid *string `json:"kid,omitempty"`
@@ -75,11 +76,13 @@ type CertResponseKey struct {
 	E   *string `json:"e,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // CertResponse is returned by the certs endpoint
 type CertResponse struct {
 	Keys []*CertResponseKey `json:"keys,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // IssuerResponse is returned by the issuer endpoint
 type IssuerResponse struct {
 	Realm           *string `json:"realm,omitempty"`
@@ -89,6 +92,7 @@ type IssuerResponse struct {
 	TokensNotBefore *int    `json:"tokens-not-before,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ResourcePermission represents a permission granted to a resource
 type ResourcePermission struct {
 	RSID           *string  `json:"rsid,omitempty"`
@@ -98,6 +102,7 @@ type ResourcePermission struct {
 	ResourceScopes []string `json:"resource_scopes,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // RetrospecTokenResult is returned when a token was checked
 type RetrospecTokenResult struct {
 	Permissions []*ResourcePermission `json:"permissions,omitempty"`
@@ -111,6 +116,7 @@ type RetrospecTokenResult struct {
 	Type        *string               `json:"typ,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // User represents the Keycloak User Structure
 type User struct {
 	ID                         *string                     `json:"id,omitempty"`
@@ -133,6 +139,7 @@ type User struct {
 	Credentials                []*CredentialRepresentation `json:"credentials,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // SetPasswordRequest sets a new password
 type SetPasswordRequest struct {
 	Type      *string `json:"type,omitempty"`
@@ -140,6 +147,7 @@ type SetPasswordRequest struct {
 	Password  *string `json:"value,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // Component is a component
 type Component struct {
 	ID              *string          `json:"id,omitempty"`
@@ -151,18 +159,21 @@ type Component struct {
 	SubType         *string          `json:"subType,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ComponentConfig is a componentconfig
 type ComponentConfig struct {
 	Priority  []string `json:"priority,omitempty"`
 	Algorithm []string `json:"algorithm,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // KeyStoreConfig holds the keyStoreConfig
 type KeyStoreConfig struct {
 	ActiveKeys *ActiveKeys `json:"active,omitempty"`
 	Key        []*Key      `json:"keys,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ActiveKeys holds the active keys
 type ActiveKeys struct {
 	HS256 *string `json:"HS256,omitempty"`
@@ -170,6 +181,7 @@ type ActiveKeys struct {
 	AES   *string `json:"AES,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // Key is a key
 type Key struct {
 	ProviderID       *string `json:"providerId,omitempty"`
@@ -182,12 +194,14 @@ type Key struct {
 	Certificate      *string `json:"certificate,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // Attributes holds Attributes
 type Attributes struct {
 	LDAPENTRYDN []string `json:"LDAP_ENTRY_DN,omitempty"`
 	LDAPID      []string `json:"LDAP_ID,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // Access represents access
 type Access struct {
 	ManageGroupMembership *bool `json:"manageGroupMembership"`
@@ -197,6 +211,7 @@ type Access struct {
 	Manage                *bool `json:"manage"`
 }
 
+// +k8s:deepcopy-gen=true
 // UserGroup is a UserGroup
 type UserGroup struct {
 	ID   *string `json:"id,omitempty"`
@@ -204,6 +219,7 @@ type UserGroup struct {
 	Path *string `json:"path,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // GetUsersParams represents the optional parameters for getting users
 type GetUsersParams struct {
 	BriefRepresentation *bool   `json:"briefRepresentation,string"`
@@ -216,6 +232,7 @@ type GetUsersParams struct {
 	Username            *string `json:"username,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ExecuteActionsEmail represents parameters for executing action emails
 type ExecuteActionsEmail struct {
 	UserID      *string  `json:"-"`
@@ -225,6 +242,7 @@ type ExecuteActionsEmail struct {
 	Actions     []string `json:"-"`
 }
 
+// +k8s:deepcopy-gen=true
 // Group is a Group
 type Group struct {
 	ID          *string             `json:"id,omitempty"`
@@ -237,6 +255,7 @@ type Group struct {
 	RealmRoles  []string            `json:"realmRoles,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // GetGroupsParams represents the optional parameters for getting groups
 type GetGroupsParams struct {
 	First  *int    `json:"first,string,omitempty"`
@@ -245,6 +264,7 @@ type GetGroupsParams struct {
 	Full   *bool   `json:"full,string,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // Role is a role
 type Role struct {
 	ID                 *string             `json:"id,omitempty"`
@@ -257,6 +277,7 @@ type Role struct {
 	Attributes         map[string][]string `json:"attributes,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ClientMappingsRepresentation is a client role mappings
 type ClientMappingsRepresentation struct {
 	ID       *string `json:"id,omitempty"`
@@ -264,12 +285,14 @@ type ClientMappingsRepresentation struct {
 	Mappings []*Role `json:"mappings,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // MappingsRepresentation is a representation of role mappings
 type MappingsRepresentation struct {
 	ClientMappings map[string]*ClientMappingsRepresentation `json:"clientMappings,omitempty"`
 	RealmMappings  []*Role                                  `json:"realmMappings,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ClientScope is a ClientScope
 type ClientScope struct {
 	ID                    *string                `json:"id,omitempty"`
@@ -280,6 +303,7 @@ type ClientScope struct {
 	ProtocolMappers       []*ProtocolMappers     `json:"protocolMappers,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ClientScopeAttributes are attributes of client scopes
 type ClientScopeAttributes struct {
 	ConsentScreenText      *string `json:"consent.screen.text,omitempty"`
@@ -287,6 +311,7 @@ type ClientScopeAttributes struct {
 	IncludeInTokenScope    *string `json:"include.in.token.scope,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ProtocolMappers are protocolmappers
 type ProtocolMappers struct {
 	ID                    *string                `json:"id,omitempty"`
@@ -297,6 +322,7 @@ type ProtocolMappers struct {
 	ProtocolMappersConfig *ProtocolMappersConfig `json:"config,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ProtocolMappersConfig is a config of a protocol mapper
 type ProtocolMappersConfig struct {
 	UserinfoTokenClaim                 *string `json:"userinfo.token.claim,omitempty"`
@@ -311,6 +337,7 @@ type ProtocolMappersConfig struct {
 	IncludedClientAudience             *string `json:"included.client.audience,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // Client is a ClientRepresentation
 type Client struct {
 	Access                             map[string]interface{}          `json:"access,omitempty"`
@@ -352,6 +379,7 @@ type Client struct {
 	WebOrigins                         []string                        `json:"webOrigins,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ResourceServerRepresentation represents the resources of a Server
 type ResourceServerRepresentation struct {
 	AllowRemoteResourceManagement *bool                     `json:"allowRemoteResourceManagement"`
@@ -364,6 +392,7 @@ type ResourceServerRepresentation struct {
 	Scopes                        []*ScopeRepresentation    `json:"scopes,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // RoleDefinition represents a role in a RolePolicyRepresentation
 type RoleDefinition struct {
 	ID      *string `json:"id"`
@@ -399,6 +428,7 @@ var (
 	CONSENSUS   *DecisionStrategy = DecisionStrategyP("CONSENSUS")
 )
 
+// +k8s:deepcopy-gen=true
 // PolicyRepresentation is a representation of a Policy
 type PolicyRepresentation struct {
 	Config           map[string]string `json:"config,omitempty"`
@@ -421,21 +451,25 @@ type PolicyRepresentation struct {
 	GroupPolicyRepresentation
 }
 
+// +k8s:deepcopy-gen=true
 // RolePolicyRepresentation represents role based policies
 type RolePolicyRepresentation struct {
 	Roles []*RoleDefinition `json:"roles,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // JSPolicyRepresentation represents js based policies
 type JSPolicyRepresentation struct {
 	Code *string `json:"code,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // ClientPolicyRepresentation represents client based policies
 type ClientPolicyRepresentation struct {
 	Clients []string `json:"clients,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // TimePolicyRepresentation represents time based policies
 type TimePolicyRepresentation struct {
 	NotBefore    *string `json:"notBefore,omitempty"`
@@ -452,22 +486,26 @@ type TimePolicyRepresentation struct {
 	MinuteEnd    *string `json:"minuteEnd,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // UserPolicyRepresentation represents user based policies
 type UserPolicyRepresentation struct {
 	Users []string `json:"users,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // AggregatedPolicyRepresentation represents aggregated policies
 type AggregatedPolicyRepresentation struct {
 	Policies []string `json:"policies,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // GroupPolicyRepresentation represents group based policies
 type GroupPolicyRepresentation struct {
 	Groups      []*GroupDefinition `json:"groups,omitempty"`
 	GroupsClaim *string            `json:"groupsClaim,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // GroupDefinition represents a group in a GroupPolicyRepresentation
 type GroupDefinition struct {
 	ID             *string `json:"id"`
@@ -475,6 +513,7 @@ type GroupDefinition struct {
 	ExtendChildren *bool   `json:"extendChildren,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ResourceRepresentation is a representation of a Resource
 type ResourceRepresentation struct {
 	ID                 *string                      `json:"_id,omitempty"` //TODO: is marked "_optional" in template, input error or deliberate?
@@ -489,12 +528,14 @@ type ResourceRepresentation struct {
 	URIs               []string                     `json:"uris,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // ResourceOwnerRepresentation represents a resource's owner
 type ResourceOwnerRepresentation struct {
 	ID   *string `json:"id"`
 	Name *string `json:"name"`
 }
 
+// +k8s:deepcopy-gen=true
 // ScopeRepresentation is a represents a Scope
 type ScopeRepresentation struct {
 	DisplayName *string                   `json:"displayName,omitempty"`
@@ -505,6 +546,7 @@ type ScopeRepresentation struct {
 	Resources   []*ResourceRepresentation `json:"resources,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ProtocolMapperRepresentation represents....
 type ProtocolMapperRepresentation struct {
 	Config         map[string]string `json:"config,omitempty"`
@@ -514,12 +556,14 @@ type ProtocolMapperRepresentation struct {
 	ProtocolMapper *string           `json:"protocolMapper,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // GetClientsParams represents the query parameters
 type GetClientsParams struct {
 	ClientID     *string `json:"clientId,omitempty"`
 	ViewableOnly *bool   `json:"viewableOnly,string"`
 }
 
+// +k8s:deepcopy-gen=true
 // UserInfo is returned by the userinfo endpoint
 type UserInfo struct {
 	Sub               *string     `json:"sub,omitempty"`
@@ -529,6 +573,7 @@ type UserInfo struct {
 	Email             *string     `json:"email,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // RealmRepresentation represent a realm
 type RealmRepresentation struct {
 	AccessCodeLifespan                  *int              `json:"accessCodeLifespan,omitempty"`
@@ -626,6 +671,7 @@ type RealmRepresentation struct {
 	WaitIncrementSeconds                *int              `json:"waitIncrementSeconds,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // MultiValuedHashMap represents something
 type MultiValuedHashMap struct {
 	Empty      *bool    `json:"empty"`
@@ -633,6 +679,7 @@ type MultiValuedHashMap struct {
 	Threshold  *int32   `json:"threshold,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // CredentialRepresentation represents credentials
 type CredentialRepresentation struct {
 	Algorithm         *string             `json:"algorithm,omitempty"`
@@ -650,6 +697,7 @@ type CredentialRepresentation struct {
 	Value             *string             `json:"value,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // TokenOptions represents the options to obtain a token
 type TokenOptions struct {
 	ClientID      *string  `json:"client_id"`
@@ -682,6 +730,7 @@ func (t *TokenOptions) FormData() map[string]string {
 	return res
 }
 
+// +k8s:deepcopy-gen=true
 // RequestingPartyTokenOptions represents the options to obtain a requesting party token
 type RequestingPartyTokenOptions struct {
 	GrantType                   *string  `json:"grant_type"`
@@ -712,6 +761,7 @@ func (t *RequestingPartyTokenOptions) FormData() map[string]string {
 	return res
 }
 
+// +k8s:deepcopy-gen=true
 // UserSessionRepresentation represents a list of user's sessions
 type UserSessionRepresentation struct {
 	Clients    map[string]string `json:"clients,omitempty"`
@@ -723,6 +773,7 @@ type UserSessionRepresentation struct {
 	Username   *string           `json:"username,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // SystemInfoRepresentation represents a system info
 type SystemInfoRepresentation struct {
 	FileEncoding   *string `json:"fileEncoding"`
@@ -745,6 +796,7 @@ type SystemInfoRepresentation struct {
 	Version        *string `json:"version,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // MemoryInfoRepresentation represents a memory info
 type MemoryInfoRepresentation struct {
 	Free           *int    `json:"free,omitempty"`
@@ -756,12 +808,14 @@ type MemoryInfoRepresentation struct {
 	UsedFormated   *string `json:"usedFormated,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ServerInfoRepesentation represents a server info
 type ServerInfoRepesentation struct {
 	SystemInfo *SystemInfoRepresentation `json:"systemInfo,omitempty"`
 	MemoryInfo *MemoryInfoRepresentation `json:"memoryInfo"`
 }
 
+// +k8s:deepcopy-gen=true
 // IdentityProviderRepresentation represents an identity provider
 type IdentityProviderRepresentation struct {
 	AddReadTokenRoleOnCreate  *bool             `json:"addReadTokenRoleOnCreate,omitempty"`
@@ -778,6 +832,7 @@ type IdentityProviderRepresentation struct {
 	TrustEmail                *bool             `json:"trustEmail,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // GetResourceParams represents the optional parameters for getting resources
 type GetResourceParams struct {
 	Deep  *bool   `json:"deep,omitempty"`
@@ -790,6 +845,7 @@ type GetResourceParams struct {
 	Scope *string `json:"scope,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // GetScopeParams represents the optional parameters for getting scopes
 type GetScopeParams struct {
 	Deep  *bool   `json:"deep,omitempty"`
@@ -798,6 +854,7 @@ type GetScopeParams struct {
 	Name  *string `json:"name,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // GetPolicyParams represents the optional parameters for getting policies
 // TODO: more policy params?
 type GetPolicyParams struct {
@@ -808,6 +865,7 @@ type GetPolicyParams struct {
 	Type       *string `json:"type,omitempty"`
 }
 
+// +k8s:deepcopy-gen=false
 // GetPermissionParams represents the optional parameters for getting permissions
 type GetPermissionParams struct {
 	First    *int    `json:"first,omitempty"`
@@ -818,6 +876,7 @@ type GetPermissionParams struct {
 	Type     *string `json:"type,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // PermissionRepresentation is a representation of a Permission
 type PermissionRepresentation struct {
 	DecisionStrategy *DecisionStrategy `json:"decisionStrategy,omitempty"`
